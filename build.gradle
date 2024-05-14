@@ -36,7 +36,7 @@ def readVersion() {
 }
 
 version = readVersion()
-group "software.amazon.msk"
+group "io.metropolis"
 
 dependencies {
     compileOnly('org.apache.kafka:kafka-clients:2.8.1')

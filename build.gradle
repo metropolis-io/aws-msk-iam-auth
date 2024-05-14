@@ -136,9 +136,9 @@ publishing {
                         "Kafka clients to use AWS IAM for authentication and authorization against Amazon MSK " +
                         "clusters that have AWS IAM enabled as an authentication mechanism"
                 scm {
-                    url = "https://github.com/aws/aws-msk-iam-auth"
-                    connection = "scm:git:https://github.com/aws/aws-msk-iam-auth.git"
-                    developerConnection = "scm:git:git@github.com:aws/aws-msk-iam-auth.git"
+                    url = "https://github.com/metropolis-io/aws-msk-iam-auth"
+                    connection = "scm:git:https://github.com/metropolis-io/aws-msk-iam-auth.git"
+                    developerConnection = "scm:git:git@github.com:metropolis-io/aws-msk-iam-auth.git"
                 }
                 licenses {
                     license {
@@ -148,9 +148,8 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = "amazonwebservices"
-                        organization = "Amazon Web Services"
-                        organizationUrl = "https://aws.amazon.com"
+                        id = "metropolis-io"
+                        organization = "io.metropolis"
                     }
                 }
             }
@@ -159,21 +158,13 @@ publishing {
 
     repositories {
         maven {
-            name = "sonatype-staging"
-            url "https://aws.oss.sonatype.org/service/local/staging/deploy/maven2"
+            name = "GitHubPackages"
+            url "https://maven.pkg.github.com/metropolis-io/aws-msk-iam-auth"
             credentials {
-                username project.hasProperty('ossrhUsername') ? project.property('ossrhUsername') : ""
-                password project.hasProperty('ossrhPassword') ? project.property('ossrhPassword') : ""
+                username = System.getenv("GITHUB_ACTOR") // Set your GitHub username here
+                password = System.getenv("GITHUB_TOKEN")    // Set your GitHub PAT here
             }
         }
     }
 
 }
-signing {
-    def signingKey = project.hasProperty('signingKey') ? project.property('signingKey') : ""
-    def signingPassword = project.hasProperty('signingPassword') ? project.property('signingPassword') : ""
-    useInMemoryPgpKeys(signingKey, signingPassword)
-    sign publishing.publications.mavenJava
-}
-
-
